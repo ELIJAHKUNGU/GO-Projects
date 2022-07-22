@@ -8,6 +8,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/jinzhu/gorm"
+	// "lulu/dbconnection"
 )
 
 type User struct {
@@ -34,33 +35,47 @@ func createUser(w http.ResponseWriter, r *http.Request) {
 
 	cnt := strings.Count(cm, "*")
 
+	response1 := ""
+	response2 := ""
+
 	if cnt == 0 {
 		// This is the first request. Note how we start the response with CON
-		// response  := "CON Welcome to jameniplaform Kenya \n";
-		var response string = "1. Please enter your Name \n"
+		response1 = "CON Welcome to jameniplaform Kenya \n"
+		response2 = "1. Please enter your Name \n"
 	} else if cnt == 1 {
 		// Business logic for first levelresponse
-		response := "CON 2. Please enter your ID Number \n"
+		response1 = "CON 2. Please enter your ID Number \n"
 	} else if cnt == 2 {
 		// Business logic for first levelresponse
-		response := "CON 3. Please enter your county code \n"
-		response := "e.g 033 for Narok \n"
+		response1 = "CON 3. Please enter your county code \n"
+		response2 = "e.g 033 for Narok \n"
 	} else if cnt == 3 {
 		// Business logic for first levelresponse
-		response := "CON 4. Please enter the name of your co operative \n"
-		response := "e.g for Narok co operative \n"
+		response1 = "CON 4. Please enter the name of your co operative \n"
+		response2 = "e.g for Narok co operative \n"
 	} else if cnt == 4 {
 		// Business logic for first levelresponse
-		response := "CON 5. Please enter the items that you sell separated by a comma \n"
-		response := "e.g Belts, bags,earings \n"
+		response1 = "CON 5. Please enter the items that you sell separated by a comma \n"
+		response2 = "e.g Belts, bags,earings \n"
 
 	} else if cnt == 5 {
 		// Business logic for first levelresponse
 		// This is a terminal request. Note how we start theresponse with END
-		response := "END Thank you very much for registering with us"
-		// x := explode("*",user.text);
+		response1 = "END Thank you very much for registering with us"
+		// x = explode("*",user.text);
+		x := strings.Split(user.text, "*")
+
+		//to make sure there are used
+		println(x)
 		//"kadzo*kadzo*33334009*045*narok coop";
 	}
+
+	//to make sure there are used
+	println(response1, response2)
+
+	//Create a db connection
+
+	//Insert into mysql
 
 }
 func main() {
